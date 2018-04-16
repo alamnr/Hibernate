@@ -18,7 +18,7 @@
 		<property name="connection.pool_size">1</property>
 
 		<!-- SQL Dialect -->
-		<property name="dialect">org.hibernate.dialect.H2Dialect</property>
+		<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
 
 		<!-- Disable the second level cache -->
 		<property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
@@ -30,7 +30,7 @@
 		<property name="hbm2ddl.auto">create</property>
 
 		<!-- Names the annotated entity class -->
-		<!-- <mapping class="org.hibernate.tutorial.annotation.Event"/> -->
+		<mapping class="org.javabrains.koushik.dto.UserDetails"/> 
 
 	</session-factory>
 
