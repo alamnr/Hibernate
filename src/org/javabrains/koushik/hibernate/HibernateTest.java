@@ -6,23 +6,32 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.cfg.Configuration;
+import org.javabrains.koushik.dto.Address;
 import org.javabrains.koushik.dto.UserDetails;
 
 public class HibernateTest {
-	
-	public static void main(String[] args)
-	{
+
+	public static void main(String[] args) {
 		UserDetails user = new UserDetails();
-		
+
 		user.setUserName("First User");
-		
-UserDetails user2 = new UserDetails();
-		
+
+		UserDetails user2 = new UserDetails();
+
 		user2.setUserName("Second User");
-		
-		
-		//SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-		SessionFactory sessionFactory = new AnnotationConfiguration().configure("hibernate.cfg.xml").buildSessionFactory();
+
+		Address address = new Address();
+		address.setStreet("Street name");
+		address.setCity("City Name");
+		address.setState("State Name");
+		address.setPincode("Pin Code");
+
+		user.setAddress(address);
+
+		// SessionFactory sessionFactory = new
+		// Configuration().configure().buildSessionFactory();
+		SessionFactory sessionFactory = new AnnotationConfiguration().configure("hibernate.cfg.xml")
+				.buildSessionFactory();
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		session.save(user);
@@ -30,11 +39,18 @@ UserDetails user2 = new UserDetails();
 		session.getTransaction().commit();
 		session.close();
 		
+		user = null;
 		
+		session = sessionFactory.openSession();
+		session.beginTransaction();
+		user = (UserDetails) session.get(UserDetails.class, 1);
+		System.out.println(user.getAddress().getStreet());
+		session.getTransaction().commit();
+		session.close();
 		
-		
+		// Since address is a value type and embedded object 
+		// hence it's placed on  first level cache in user_detail table , so the value of address is available after session.close() 
+		System.out.println(user.getAddress().getPincode());
 	}
-	
-	
 
 }
