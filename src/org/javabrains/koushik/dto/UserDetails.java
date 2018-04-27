@@ -16,12 +16,10 @@ public class UserDetails {
 	
 	@Id
 	private int userId;
-	@Transient
 	private String userName;
-	@Temporal(TemporalType.DATE)
 	private Date joinedDate;
 	private String Address;
-	@Lob
+	
 	private String description;
 	
 	
