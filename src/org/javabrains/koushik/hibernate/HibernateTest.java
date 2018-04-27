@@ -13,11 +13,12 @@ public class HibernateTest {
 	public static void main(String[] args)
 	{
 		UserDetails user = new UserDetails();
-		user.setUserId(1);
+		
 		user.setUserName("First User");
-		user.setAddress("First User Address");
-		user.setJoinedDate(new Date());
-		user.setDescription("Description of the user goes here");
+		
+UserDetails user2 = new UserDetails();
+		
+		user2.setUserName("Second User");
 		
 		
 		//SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
@@ -25,14 +26,10 @@ public class HibernateTest {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		session.save(user);
+		session.save(user2);
 		session.getTransaction().commit();
 		session.close();
 		
-		user = null;
-		session = sessionFactory.openSession();
-		session.beginTransaction();
-		user = (UserDetails) session.get(UserDetails.class, 1);
-		System.out.println("User Name retrieved- "+ user.getUserName());
 		
 		
 		
