@@ -1,5 +1,7 @@
 package org.javabrains.koushik.hibernate;
 
+import java.util.Date;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
@@ -11,8 +13,12 @@ public class HibernateTest {
 	public static void main(String[] args)
 	{
 		UserDetails user = new UserDetails();
-		user.setUserId(3);
-		user.setUserName("Third User");
+		user.setUserId(1);
+		user.setUserName("First User");
+		user.setAddress("First User Address");
+		user.setJoinedDate(new Date());
+		user.setDescription("Description of the user goes here");
+		
 		
 		//SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 		SessionFactory sessionFactory = new AnnotationConfiguration().configure("hibernate.cfg.xml").buildSessionFactory();
