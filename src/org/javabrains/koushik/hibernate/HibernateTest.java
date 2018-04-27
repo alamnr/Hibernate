@@ -25,8 +25,16 @@ public class HibernateTest {
 		address.setCity("City Name");
 		address.setState("State Name");
 		address.setPincode("Pin Code");
+		
+		Address address2 = new Address();
+		address2.setStreet(" Another Street name");
+		address2.setCity("Another City Name");
+		address2.setState("Another State Name");
+		address2.setPincode("Another Pin Code");
 
-		user.setAddress(address);
+		user.setOfficeAddress(address2);
+		
+		user.setHomeAddress(address2);
 
 		// SessionFactory sessionFactory = new
 		// Configuration().configure().buildSessionFactory();
@@ -44,13 +52,13 @@ public class HibernateTest {
 		session = sessionFactory.openSession();
 		session.beginTransaction();
 		user = (UserDetails) session.get(UserDetails.class, 1);
-		System.out.println(user.getAddress().getStreet());
+		//System.out.println(user.getAddress().getStreet());
 		session.getTransaction().commit();
 		session.close();
 		
 		// Since address is a value type and embedded object 
 		// hence it's placed on  first level cache in user_detail table , so the value of address is available after session.close() 
-		System.out.println(user.getAddress().getPincode());
+		//System.out.println("Adrress value after session close- "+user.getAddress().getPincode());
 	}
 
 }
