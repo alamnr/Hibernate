@@ -14,6 +14,7 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -39,7 +40,7 @@ public class UserDetails {
 	private String userName;
 	
 	
-	@CollectionOfElements
+	@CollectionOfElements(fetch=FetchType.EAGER)
 	@JoinTable(name="USER_ADDRESS",
 				joinColumns=@JoinColumn(name="USER_ID")
 	)
@@ -89,11 +90,13 @@ public class UserDetails {
 		}
 		
 		// Iterator Pattern (Where there is a aggregate Root there is iterator pattern so that you expose  the list  of address publicly)
-		public Iterator<Address> getListOfAddresses() {
+		public Iterator<Address> getAddressesIterator() {
 			return listOfAddresses.iterator();
 		}
 		
-	
+		public Collection<Address> getListOfAddresses() {
+			return listOfAddresses;
+		}
 	
 
 }

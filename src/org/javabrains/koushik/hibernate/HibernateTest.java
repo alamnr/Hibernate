@@ -14,6 +14,7 @@ public class HibernateTest {
 	public static void main(String[] args) {
 		UserDetails user = new UserDetails();
 
+		user.setUserId(1);
 		user.setUserName("First User");
 
 		Address addr1 = new Address();
@@ -48,6 +49,20 @@ public class HibernateTest {
 			session.save(user);
 			session.getTransaction().commit();
 			session.close();
+			
+			
+			user = null;
+			session = sessionFactory.openSession();
+			user = (UserDetails) session.get(UserDetails.class, 16);
+			//System.out.println("size: "+ user.getAddressesIterator());
+			
+			session.close();
+			
+			// Hiernate Default is Lazy Fetch
+			System.out.println( user.getUserName());
+			System.out.println("size: "+ user.getListOfAddresses().size());
+			
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
