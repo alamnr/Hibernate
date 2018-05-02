@@ -16,49 +16,42 @@ public class HibernateTest {
 
 		user.setUserName("First User");
 
-		UserDetails user2 = new UserDetails();
+		Address addr1 = new Address();
+		addr1.setStreet("First Street");
+		addr1.setCity("First City");
+		addr1.setState("First State");
+		addr1.setPincode("10001");
+		addr1.setAddressType("Home");
 
-		user2.setUserName("Second User");
+		Address addr2 = new Address();
+		addr2.setStreet("Second Street");
+		addr2.setCity("Second City");
+		addr2.setState("Second State");
+		addr2.setPincode("20002");
+		addr2.setAddressType("Office");
 
-		Address address = new Address();
-		address.setStreet("Street name");
-		address.setCity("City Name");
-		address.setState("State Name");
-		address.setPincode("Pin Code");
-		
-		Address address2 = new Address();
-		address2.setStreet(" Another Street name");
-		address2.setCity("Another City Name");
-		address2.setState("Another State Name");
-		address2.setPincode("Another Pin Code");
+		try {
+			/*user.addAddress(addr1);
+			user.addAddress(addr2);*/
+			
+			user.getListOfAddresses().add(addr1);
+			user.getListOfAddresses().add(addr2);
 
-		user.setOfficeAddress(address2);
-		
-		user.setHomeAddress(address2);
-
-		// SessionFactory sessionFactory = new
-		// Configuration().configure().buildSessionFactory();
-		SessionFactory sessionFactory = new AnnotationConfiguration().configure("hibernate.cfg.xml")
-				.buildSessionFactory();
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
-		session.save(user);
-		session.save(user2);
-		session.getTransaction().commit();
-		session.close();
-		
-		user = null;
-		
-		session = sessionFactory.openSession();
-		session.beginTransaction();
-		user = (UserDetails) session.get(UserDetails.class, 1);
-		//System.out.println(user.getAddress().getStreet());
-		session.getTransaction().commit();
-		session.close();
-		
-		// Since address is a value type and embedded object 
-		// hence it's placed on  first level cache in user_detail table , so the value of address is available after session.close() 
-		//System.out.println("Adrress value after session close- "+user.getAddress().getPincode());
+			/*
+			 * SessionFactory sessionFactory = new
+			 * Configuration().configure().buildSessionFactory();
+			 */
+			SessionFactory sessionFactory = new AnnotationConfiguration().configure("hibernate.cfg.xml")
+					.buildSessionFactory();
+			Session session = sessionFactory.openSession();
+			session.beginTransaction();
+			session.save(user);
+			session.getTransaction().commit();
+			session.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

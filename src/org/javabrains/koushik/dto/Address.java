@@ -2,8 +2,10 @@ package org.javabrains.koushik.dto;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.Entity;
 
 @Embeddable
+//@Entity
 public class Address {
 	
 	@Column(name="STREET_NAME")
@@ -14,6 +16,17 @@ public class Address {
 	private String state;
 	@Column(name="PIN_CODE")
 	private String pincode;
+	@Column(name="ADDRESS_TYPE")
+	private String addressType;
+	
+	
+	
+	public String getAddressType() {
+		return addressType;
+	}
+	public void setAddressType(String addressType) {
+		this.addressType = addressType;
+	}
 	public String getStreet() {
 		return street;
 	}
