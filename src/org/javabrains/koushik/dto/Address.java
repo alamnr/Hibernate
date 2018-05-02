@@ -4,8 +4,9 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 
+// Value type obj
 @Embeddable
-//@Entity
+
 public class Address {
 	
 	@Column(name="STREET_NAME")

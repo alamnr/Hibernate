@@ -21,6 +21,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.Lob;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -39,31 +40,18 @@ public class UserDetails {
 	private int userId;
 	private String userName;
 	
+	@OneToOne
+	@JoinColumn(name="VEHICLE_ID")
+	private Vehicle vehicle;
 	
-	@CollectionOfElements(fetch=FetchType.EAGER)
-	@JoinTable(name="USER_ADDRESS",
-				joinColumns=@JoinColumn(name="USER_ID")
-	)
-
-	@GenericGenerator(name = "hilo-gen", strategy = "hilo")
-	@CollectionId(columns = { @Column(name="ADDRESS_ID") }, generator = "hilo-gen", type = @Type(type = "long"))
-	private Collection<Address> listOfAddresses = new ArrayList<Address>();
-	
-	
-	/*@CollectionOfElements
-	@JoinTable(name="USER_ADDRESS",
-				joinColumns=@JoinColumn(name="USER_ID")
-	)
-	private Set<Address> listOfAddresses = new HashSet<Address>();
-	*/
-	/*public Set<Address> getListOfAddresses() {
-		return listOfAddresses;
+	public Vehicle getVehicle() {
+		return vehicle;
 	}
-	public void setListOfAddresses(Set<Address> listOfAddresses) {
-		this.listOfAddresses = listOfAddresses;
-	}*/
-	
-	
+
+	public void setVehicle(Vehicle vehicle) {
+		this.vehicle = vehicle;
+	}
+
 	public int getUserId() {
 		return userId;
 	}
@@ -78,25 +66,6 @@ public class UserDetails {
 		this.userName = userName;
 	}
 	
-	// Aggregate root- everything goes through one root 
-		
-		public void addAddress(Address address) throws Exception{
-			for(Address a : listOfAddresses){
-				if(a.getAddressType() == address.getAddressType()){
-					throw new Exception("Not Allowed");
-				}
-			}
-			listOfAddresses.add(address);
-		}
-		
-		// Iterator Pattern (Where there is a aggregate Root there is iterator pattern so that you expose  the list  of address publicly)
-		public Iterator<Address> getAddressesIterator() {
-			return listOfAddresses.iterator();
-		}
-		
-		public Collection<Address> getListOfAddresses() {
-			return listOfAddresses;
-		}
 	
 
 }
