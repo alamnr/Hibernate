@@ -1,5 +1,7 @@
 package org.javabrains.koushik.dto;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -36,21 +38,29 @@ public class UserDetails {
 	private int userId;
 	private String userName;
 	
-	//@ElementCollection
+	
 	@CollectionOfElements
-	/*@JoinTable(name="USER_ADDRESS",
+	@JoinTable(name="USER_ADDRESS",
 				joinColumns=@JoinColumn(name="USER_ID")
 	)
+
 	@GenericGenerator(name = "hilo-gen", strategy = "hilo")
-	@CollectionId(columns = { @Column(name="ADDRESS_ID") }, generator = "hilo-gen", type = @Type(type = "long"))*/
-	private Set<Address> listOfAddresses = new HashSet<Address>();
+	@CollectionId(columns = { @Column(name="ADDRESS_ID") }, generator = "hilo-gen", type = @Type(type = "long"))
+	private Collection<Address> listOfAddresses = new ArrayList<Address>();
 	
-	public Set<Address> getListOfAddresses() {
+	
+	/*@CollectionOfElements
+	@JoinTable(name="USER_ADDRESS",
+				joinColumns=@JoinColumn(name="USER_ID")
+	)
+	private Set<Address> listOfAddresses = new HashSet<Address>();
+	*/
+	/*public Set<Address> getListOfAddresses() {
 		return listOfAddresses;
 	}
 	public void setListOfAddresses(Set<Address> listOfAddresses) {
 		this.listOfAddresses = listOfAddresses;
-	}
+	}*/
 	
 	
 	public int getUserId() {
@@ -68,7 +78,7 @@ public class UserDetails {
 	}
 	
 	// Aggregate root- everything goes through one root 
-		/*
+		
 		public void addAddress(Address address) throws Exception{
 			for(Address a : listOfAddresses){
 				if(a.getAddressType() == address.getAddressType()){
@@ -76,12 +86,12 @@ public class UserDetails {
 				}
 			}
 			listOfAddresses.add(address);
-		}*/
+		}
 		
 		// Iterator Pattern (Where there is a aggregate Root there is iterator pattern so that you expose  the list  of address publicly)
-		/*public Iterator<Address> getListOfAddresses() {
+		public Iterator<Address> getListOfAddresses() {
 			return listOfAddresses.iterator();
-		}*/
+		}
 		
 	
 	

@@ -31,11 +31,11 @@ public class HibernateTest {
 		addr2.setAddressType("Office");
 
 		try {
-			/*user.addAddress(addr1);
-			user.addAddress(addr2);*/
+			user.addAddress(addr1);
+			user.addAddress(addr2);
 			
-			user.getListOfAddresses().add(addr1);
-			user.getListOfAddresses().add(addr2);
+			/*user.getListOfAddresses().add(addr1);
+			user.getListOfAddresses().add(addr2);*/
 
 			/*
 			 * SessionFactory sessionFactory = new
