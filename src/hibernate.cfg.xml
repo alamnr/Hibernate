@@ -40,22 +40,22 @@
 		<mapping class="org.javabrains.koushik.dto.TwoWheeler"/>
 		<mapping class="org.javabrains.koushik.dto.FourWheeler"/>
 		   
-		<mapping class="org.hibernate.in.action.book.selfAssociationAndValueType.dto.Message"/>
+		<!-- <mapping class="org.hibernate.in.action.book.selfAssociationAndValueType.dto.Message"/>
 		<mapping class="org.hibernate.in.action.book.selfAssociationAndValueType.dto.Category"/>
 		<mapping class="org.hibernate.in.action.book.inheritance.Table_per_concrete_class_with_implicit_polymorphism.dto.CreditCard"/>
 		<mapping class="org.hibernate.in.action.book.inheritance.Table_per_concrete_class_with_implicit_polymorphism.dto.DebitCard"/>
-		
+		 -->
 		<!-- <mapping class="org.hibernate.in.action.book.inheritance.Table_per_class_with_unions.dto.BillingDetails_1"/>
 		<mapping class="org.hibernate.in.action.book.inheritance.Table_per_class_with_unions.dto.CreditCard_1"/>
 		<mapping class="org.hibernate.in.action.book.inheritance.Table_per_class_with_unions.dto.DebitCard_1"/>
 		 -->
-		<mapping class="org.hibernate.in.action.book.inheritance.single_table.dto.BillingDetails_2"/>
+		<!-- <mapping class="org.hibernate.in.action.book.inheritance.single_table.dto.BillingDetails_2"/>
 		<mapping class="org.hibernate.in.action.book.inheritance.single_table.dto.CreditCard_2"/>
 		<mapping class="org.hibernate.in.action.book.inheritance.single_table.dto.DebitCard_2"/>
 		
 		<mapping class="org.hibernate.in.action.book.association.dto.Item"/>
 		<mapping class="org.hibernate.in.action.book.association.dto.Bid"/>
-
+ -->
 	</session-factory>
 
 </hibernate-configuration>
