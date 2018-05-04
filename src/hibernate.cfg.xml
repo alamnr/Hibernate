@@ -36,7 +36,10 @@
 
 		<!-- Names the annotated entity class -->
 		<mapping class="org.javabrains.koushik.dto.UserDetails"/>
-		<mapping class="org.javabrains.koushik.dto.Vehicle"/>   
+		<mapping class="org.javabrains.koushik.dto.Vehicle"/>
+		<mapping class="org.javabrains.koushik.dto.TwoWheeler"/>
+		<mapping class="org.javabrains.koushik.dto.FourWheeler"/>
+		   
 		<mapping class="org.hibernate.in.action.book.selfAssociationAndValueType.dto.Message"/>
 		<mapping class="org.hibernate.in.action.book.selfAssociationAndValueType.dto.Category"/>
 		<mapping class="org.hibernate.in.action.book.inheritance.Table_per_concrete_class_with_implicit_polymorphism.dto.CreditCard"/>
