@@ -1,11 +1,15 @@
 package org.javabrains.koushik.dto;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 // Entity Object, requires mapping in hibernate.cfg.xml
@@ -17,18 +21,17 @@ public class Vehicle {
 	private int vehicleId;
 	private String vehicleName;
 	
-	@ManyToOne
-	@JoinColumn(name="USER_ID",nullable=false)
-	private UserDetails user; 
+	@ManyToMany
+	private Collection<UserDetails> users = new ArrayList<UserDetails>(); 
 	
 	
 	
 	
-	public UserDetails getUser() {
-		return user;
+	public Collection<UserDetails> getUsers() {
+		return users;
 	}
-	public void setUser(UserDetails user) {
-		this.user = user;
+	public void setUsers(Collection<UserDetails> users) {
+		this.users = users;
 	}
 	public int getVehicleId() {
 		return vehicleId;

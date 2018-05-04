@@ -39,8 +39,8 @@ public class HibernateTest {
 		   user.getVehicleList().add(vehicle);
 		   user.getVehicleList().add(vehicle2);
 		  
-		   vehicle.setUser(user); 
-		   vehicle2.setUser(user);
+		   vehicle.getUsers().add(user); 
+		   vehicle2.getUsers().add(user);
 		 
 		
 		// Bidirectional Association (OneToMany and ManyToOne)
