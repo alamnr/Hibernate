@@ -12,6 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+
 // Entity Object, requires mapping in hibernate.cfg.xml
 @Entity
 public class Vehicle {
@@ -21,18 +24,6 @@ public class Vehicle {
 	private int vehicleId;
 	private String vehicleName;
 	
-	@ManyToMany(mappedBy="vehicleList")
-	private Collection<UserDetails> users = new ArrayList<UserDetails>(); 
-	
-	
-	
-	
-	public Collection<UserDetails> getUsers() {
-		return users;
-	}
-	public void setUsers(Collection<UserDetails> users) {
-		this.users = users;
-	}
 	public int getVehicleId() {
 		return vehicleId;
 	}

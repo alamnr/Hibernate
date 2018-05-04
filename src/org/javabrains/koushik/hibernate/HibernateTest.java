@@ -38,9 +38,12 @@ public class HibernateTest {
 		  
 		   user.getVehicleList().add(vehicle);
 		   user.getVehicleList().add(vehicle2);
+		   
+		  // vehicle.setUser(user);
+		   //vehicle2.setUser(user);
 		  
-		   vehicle.getUsers().add(user); 
-		   vehicle2.getUsers().add(user);
+		   /*vehicle.getUsers().add(user); 
+		   vehicle2.getUsers().add(user);*/
 		 
 		
 		// Bidirectional Association (OneToMany and ManyToOne)
@@ -123,23 +126,34 @@ public class HibernateTest {
 		// session.save(aChild);
 		// session.save(aParent);
 		// session.save(message);
-		 session.save(user);
-		 session.save(vehicle);
-		 session.save(vehicle2);
+		 //session.save(user);
+		session.persist(user);
+		 /*session.save(vehicle);
+		 session.save(vehicle2);*/
 		session.getTransaction().commit();
 		session.close();
 		
 		//item = null;
 		
 		user = null;
+		vehicle2 =null;
+		vehicle =null;
 		session = sessionFactory.openSession();
 		//item = (Item) session.get(Item.class, 1L);*/
-		user = (UserDetails) session.get(UserDetails.class, 4);
+		user = (UserDetails) session.get(UserDetails.class, 1);
+		vehicle2 = (Vehicle) session.get(Vehicle.class, 2);
+		vehicle = (Vehicle) session.get(Vehicle.class, 1);
 		session.close();
 		
 		//System.out.println("Bid count:"+item.getBids().size());
 		
-		System.out.println("Vehicle count:"+user.getVehicleList().size());
+		//System.out.println("Vehicle count:"+user.getVehicleList().size());
+		
+		/*System.out.println("User Name: " +  vehicle.getUser().getUserName());
+		
+		System.out.println("User Name: " +  vehicle2.getUser().getUserName());
+		*/
+		
 
 		HibernateUtil.shutDown();
 
