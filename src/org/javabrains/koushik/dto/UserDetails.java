@@ -37,6 +37,7 @@ import org.hibernate.annotations.Type;
 import org.hibernate.in.action.book.association.dto.Bid;
 
 @Entity 
+@org.hibernate.annotations.Entity(selectBeforeUpdate=true) // Don't use it un-necessarily
 @Table(name="USER_DETAILS")
 public class UserDetails {
 	

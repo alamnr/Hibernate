@@ -28,49 +28,41 @@ public class HibernateTest {
 
 	public static void main(String[] args) {
 
-		/*An ORM implementation is a complex beast—less complex than an application
-		server, but more complex than a web application framework like Struts or Tapes-
-		try*/
-		
+		/*
+		 * An ORM implementation is a complex beast—less complex than an
+		 * application server, but more complex than a web application framework
+		 * like Struts or Tapes- try
+		 */
+
 		// Before opening the hibernate session an object is in Transient state
 		// Hibernate not even look on that object
-		
-		/*UserDetails user2 = new UserDetails();
-		user2.setUserId(5);*/
-		
-		
+
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
-		
-		// After opening then hibernate session and before closing the hibernate session, an object is in persistent state
+
+		// After opening then hibernate session and before closing the hibernate
+		// session, an object is in persistent state
 		// Hibernate keep looking on that object
-		/*
-		for(int i=0; i<=10;i++){
-			UserDetails user = new UserDetails();
-			user.setUserName("User- "+i);
-			session.save(user);
-		}
-		*/
-		
-		/*UserDetails user = (UserDetails) session.get(UserDetails.class, 6);
-		System.out.println("User Name- " + user.getUserName());*/
-		
-		/*UserDetails user = (UserDetails) session.get(UserDetails.class, 6);
-		session.delete(user);
-		session.delete(user2);*/
-		
-		UserDetails user = (UserDetails) session.get(UserDetails.class, 4);
-		user.setUserName("Updated User");
-		//session.update(user);
+
+		UserDetails user = (UserDetails) session.get(UserDetails.class, 1);
+		System.out.println("User Name- " + user.getUserName());
 
 		session.getTransaction().commit();
 		session.close();
 
 		// After closing the hibernate session an object is in detached state
-		//  Hibernate does not keep looking on that object
-		
-		
+		// Hibernate does not keep looking on that object
+		//user.setUserName("Updated user name after session close");
+
+		session = sessionFactory.openSession();
+		session.beginTransaction();
+		session.update(user);
+
+		user.setUserName("Change after to check select before update");
+		session.getTransaction().commit();
+		session.close();
+
 		HibernateUtil.shutDown();
 
 	}
