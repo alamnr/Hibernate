@@ -22,6 +22,8 @@ public class Vehicle {
 	private UserDetails user; 
 	
 	
+	
+	
 	public UserDetails getUser() {
 		return user;
 	}
