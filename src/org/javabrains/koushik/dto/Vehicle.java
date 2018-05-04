@@ -21,7 +21,7 @@ public class Vehicle {
 	private int vehicleId;
 	private String vehicleName;
 	
-	@ManyToMany
+	@ManyToMany(mappedBy="vehicleList")
 	private Collection<UserDetails> users = new ArrayList<UserDetails>(); 
 	
 	

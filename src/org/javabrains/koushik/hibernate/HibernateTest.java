@@ -134,7 +134,7 @@ public class HibernateTest {
 		user = null;
 		session = sessionFactory.openSession();
 		//item = (Item) session.get(Item.class, 1L);*/
-		user = (UserDetails) session.get(UserDetails.class, 1);
+		user = (UserDetails) session.get(UserDetails.class, 4);
 		session.close();
 		
 		//System.out.println("Bid count:"+item.getBids().size());
