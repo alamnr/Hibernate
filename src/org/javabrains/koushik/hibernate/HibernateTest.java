@@ -28,7 +28,12 @@ public class HibernateTest {
 
 	public static void main(String[] args) {
 
+		/*An ORM implementation is a complex beast—less complex than an application
+		server, but more complex than a web application framework like Struts or Tapes-
+		try*/
 		
+		// Before opening the hibernate session an object is in Transient state
+		// Hibernate not even look on that object
 		
 		/*UserDetails user2 = new UserDetails();
 		user2.setUserId(5);*/
@@ -37,6 +42,9 @@ public class HibernateTest {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
+		
+		// After opening then hibernate session and before closing the hibernate session, an object is in persistent state
+		// Hibernate keep looking on that object
 		/*
 		for(int i=0; i<=10;i++){
 			UserDetails user = new UserDetails();
@@ -59,28 +67,10 @@ public class HibernateTest {
 		session.getTransaction().commit();
 		session.close();
 
-		// item = null;
-
-		//user = null;
-		//vehicle2 = null;
-		//vehicle = null;
-		//session = sessionFactory.openSession();
-		// item = (Item) session.get(Item.class, 1L);
-		//user = (UserDetails) session.get(UserDetails.class, 1);
-		//vehicle2 = (Vehicle) session.get(Vehicle.class, 2);
-		//vehicle = (Vehicle) session.get(Vehicle.class, 1);
-		//session.close();
-
-		// System.out.println("Bid count:"+item.getBids().size());
-
-		// System.out.println("Vehicle count:"+user.getVehicleList().size());
-
-		/*
-		 * System.out.println("User Name: " + vehicle.getUser().getUserName());
-		 * 
-		 * System.out.println("User Name: " + vehicle2.getUser().getUserName());
-		 */
-
+		// After closing the hibernate session an object is in detached state
+		//  Hibernate does not keep looking on that object
+		
+		
 		HibernateUtil.shutDown();
 
 	}
