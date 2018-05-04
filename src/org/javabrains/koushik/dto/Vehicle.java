@@ -21,11 +21,11 @@ import org.hibernate.annotations.NotFoundAction;
 
 // Entity Object, requires mapping in hibernate.cfg.xml
 @Entity
-@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy=InheritanceType.JOINED)
 public class Vehicle {
 	
-	@Id	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="VEHICLE_ID")
+	@Id	@GeneratedValue//(strategy=GenerationType.AUTO)
+	//@Column(name="VEHICLE_ID")
 	private int vehicleId;
 	private String vehicleName;
 	
