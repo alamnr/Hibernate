@@ -1,5 +1,6 @@
 package org.javabrains.koushik.dto;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,10 +13,12 @@ import javax.persistence.ManyToOne;
 public class Vehicle {
 	
 	@Id	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="VEHICLE_ID")
 	private int vehicleId;
 	private String vehicleName;
 	
-	/*@ManyToOne
+	@ManyToOne
+	@JoinColumn(name="USER_ID",nullable=false)
 	private UserDetails user; 
 	
 	
@@ -24,7 +27,7 @@ public class Vehicle {
 	}
 	public void setUser(UserDetails user) {
 		this.user = user;
-	}*/
+	}
 	public int getVehicleId() {
 		return vehicleId;
 	}

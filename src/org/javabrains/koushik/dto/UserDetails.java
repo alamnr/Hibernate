@@ -38,13 +38,11 @@ import org.hibernate.annotations.Type;
 public class UserDetails {
 	
 	@Id @GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="USER_ID")
 	private int userId;
 	private String userName;
 	
-	@OneToMany
-	@JoinTable(name="USER_VEHICLE",joinColumns=@JoinColumn(name="USER_ID"),
-				inverseJoinColumns=@JoinColumn(name="VEHICLE_ID")
-	)
+	@OneToMany(mappedBy="user", fetch=FetchType.EAGER)
 	private Collection<Vehicle> vehicleList = new ArrayList<Vehicle>();
 	
 	
