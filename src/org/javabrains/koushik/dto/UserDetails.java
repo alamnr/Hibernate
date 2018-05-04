@@ -45,17 +45,7 @@ public class UserDetails {
 	private int userId;
 	private String userName;
 	
-	@OneToMany(cascade=CascadeType.ALL)
-	private Collection<Vehicle> vehicleList = new ArrayList<Vehicle>();
 	
-	
-	public Collection<Vehicle> getVehicleList() {
-		return vehicleList;
-	}
-
-	public void setVehicleList(Collection<Vehicle> vehicleList) {
-		this.vehicleList = vehicleList;
-	}
 
 	public int getUserId() {
 		return userId;
