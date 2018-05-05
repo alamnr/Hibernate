@@ -37,26 +37,19 @@ public class HibernateTest {
 		 * like Struts or Tapes- try
 		 */
 
-		
+		// named queries is query that consolidate on a particular place
 
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
         
-		// In order to avoid sql injection attack we use parameter binding  
 		
-		// String userIdParam = " 5 or 1=1 ";
+		/*Query query = session.getNamedQuery("UserDetails.byId");
+		query.setInteger(0, 2);*/
 		
-		String userIdParam = " 5 ";
-		String userName ="User- 10";
+		Query query = session.getNamedQuery("UserDetails.byName");
+		query.setString(0, "User- 2");
 		
-		/*Query query = session.createQuery("from UserDetails where userId > ?  and userName = ?" );
-		query.setInteger(0, Integer.parseInt(userIdParam.trim()));
-		query.setString(1, userName);*/
-		
-		Query query = session.createQuery("from UserDetails where userId > :userId  and userName = :userName" );
-		query.setInteger("userId", Integer.parseInt(userIdParam.trim()));
-		query.setString("userName", userName);
 		
 		List<UserDetails> users = (List<UserDetails>)query.list();
 		
