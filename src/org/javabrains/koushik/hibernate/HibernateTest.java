@@ -55,10 +55,9 @@ public class HibernateTest {
         
 		// Hibernate provide default first level cache and with in same session for the same object it picks data from cache while calling session.get second time
 		
-		UserDetails user = (UserDetails) session.get(UserDetails.class, 1);
-		user.setUserName("Updated User");
-		
-		UserDetails user2 = (UserDetails) session.get(UserDetails.class, 1);
+		Query query = session.createQuery("from UserDetails user where user.userId = 1");
+		query.setCacheable(true);
+		List<UserDetails> users = (List<UserDetails>)query.list();
 		
 		session.getTransaction().commit();
 		session.close();
@@ -67,7 +66,10 @@ public class HibernateTest {
 		session = sessionFactory.openSession();
 		session.beginTransaction();
 		
-		UserDetails user3 = (UserDetails) session.get(UserDetails.class, 1);
+		Query query2 = session.createQuery("from UserDetails user where user.userId = 1");
+		query2.setCacheable(true);
+		users = (List<UserDetails>)query2.list(); 
+		
 		session.getTransaction().commit();
 		session.close();
 
