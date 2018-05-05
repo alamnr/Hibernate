@@ -40,7 +40,7 @@ import org.hibernate.in.action.book.association.dto.Bid;
 
 @Entity 
 @NamedQuery(name="UserDetails.byId", query="from UserDetails where userId = ?")
-@NamedNativeQuery(name="UserDetails.byName", query="select * from User_Details where userName = ?", resultClass=UserDetails.class)
+
 @org.hibernate.annotations.Entity(selectBeforeUpdate=true) // Don't use it un-necessarily
 @Table(name="USER_DETAILS")
 public class UserDetails {
