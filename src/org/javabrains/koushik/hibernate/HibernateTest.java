@@ -1,7 +1,9 @@
 package org.javabrains.koushik.hibernate;
 
 import java.util.Date;
+import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
@@ -34,34 +36,20 @@ public class HibernateTest {
 		 * like Struts or Tapes- try
 		 */
 
-		// Before opening the hibernate session an object is in Transient state
-		// Hibernate not even look on that object
+		
 
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 
-		// After opening then hibernate session and before closing the hibernate
-		// session, an object is in persistent state
-		// Hibernate keep looking on that object
-
-		UserDetails user = (UserDetails) session.get(UserDetails.class, 1);
-		System.out.println("User Name- " + user.getUserName());
-
+		//Query query = session.createQuery("from UserDetails");
+		Query query = session.createQuery("from UserDetails where userId>5");
+		List<UserDetails> users = query.list();
+		
 		session.getTransaction().commit();
 		session.close();
 
-		// After closing the hibernate session an object is in detached state
-		// Hibernate does not keep looking on that object
-		//user.setUserName("Updated user name after session close");
-
-		session = sessionFactory.openSession();
-		session.beginTransaction();
-		session.update(user);
-
-		user.setUserName("Change after to check select before update");
-		session.getTransaction().commit();
-		session.close();
+		System.out.println("Size of list - "+ users.size());
 
 		HibernateUtil.shutDown();
 
