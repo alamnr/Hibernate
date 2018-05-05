@@ -42,36 +42,32 @@ public class HibernateTest {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
-
+        
+		// In order to avoid sql injection attack we use parameter binding  
 		
-		//Query query = session.createQuery("from UserDetails ");
+		// String userIdParam = " 5 or 1=1 ";
 		
-		//Query query = session.createQuery("select userName from UserDetails ");
+		String userIdParam = " 5 ";
+		String userName ="User- 10";
 		
-		Query query = session.createQuery("select new map(userId,userName) from UserDetails ");
+		/*Query query = session.createQuery("from UserDetails where userId > ?  and userName = ?" );
+		query.setInteger(0, Integer.parseInt(userIdParam.trim()));
+		query.setString(1, userName);*/
 		
-		Query query2 = session.createQuery("select max(userId) from UserDetails ");
+		Query query = session.createQuery("from UserDetails where userId > :userId  and userName = :userName" );
+		query.setInteger("userId", Integer.parseInt(userIdParam.trim()));
+		query.setString("userName", userName);
 		
-		query.setFirstResult(5); // select from row number -5
-		query.setMaxResults(2);
-		
-		//List<UserDetails> users = (List<UserDetails>)query.list();
-		
-		//List<String> userNames = (List<String>)query.list();
-		
-		List<Map<String,String>> users = (List<Map<String,String>>)query.list();
-		
-		int result = (int) query2.uniqueResult();
+		List<UserDetails> users = (List<UserDetails>)query.list();
 		
 		session.getTransaction().commit();
 		session.close();
 
 //		System.out.println("Size of list - "+ users.size());
 		
-		System.out.println("Size of list - "+ result);
 		
-		for (Map<String,String> map: users){
-			System.out.println(map);
+		for (UserDetails user: users){
+			System.out.println(user.getUserName());
 		}
 
 		HibernateUtil.shutDown();
