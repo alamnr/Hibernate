@@ -10,6 +10,10 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Example;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projection;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.in.action.book.association.dto.Bid;
 import org.hibernate.in.action.book.association.dto.Item;
@@ -29,6 +33,8 @@ import org.javabrains.koushik.dto.TwoWheeler;
 import org.javabrains.koushik.dto.UserDetails;
 import org.javabrains.koushik.dto.Vehicle;
 
+import javassist.tools.reflect.Sample;
+
 
 
 public class HibernateTest {
@@ -47,26 +53,38 @@ public class HibernateTest {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
         
-		Criteria criteria = session.createCriteria(UserDetails.class);
-		/*criteria.add(Restrictions.eq("userName", "User- 10"))
-				.add(Restrictions.gt("userId", 5));*/
+		UserDetails exampleUser = new UserDetails();
+		//exampleUser.setUserId(2);
+		exampleUser.setUserName("User- 2");
 		
-		//criteria.add(Restrictions.gt("userId", 5));
+		//Example example = Example.create(exampleUser);
 		
-		/*criteria.add(Restrictions.like("userName", "User- %"))
-		.add(Restrictions.gt("userId", 5));*/
+		Example example = Example.create(exampleUser).excludeProperty("userName");
 		
-		//criteria.add(Restrictions.between("userId", 5, 8));
+		Criteria criteria = session.createCriteria(UserDetails.class)
+				.add(example);
 		
-		criteria.add(Restrictions.or(Restrictions.between("userId", 0, 2),Restrictions.between("userId", 5, 8)));
+		/*Criteria criteria = session.createCriteria(UserDetails.class)
+				.setProjection(Projections.max("userId"));*/
+		
+		/*Criteria criteria = session.createCriteria(UserDetails.class)
+				.setProjection(Projections.count("userId"));
+		*/
+		
+		/*Criteria criteria = session.createCriteria(UserDetails.class)
+									.addOrder(Order.desc("userId"));*/
+		
 		
 		List<UserDetails> users = (List<UserDetails>)criteria.list();
+		
+		//int result = (int) criteria.uniqueResult();
 		
 		session.getTransaction().commit();
 		session.close();
 
 //		System.out.println("Size of list - "+ users.size());
 		
+		//System.out.println("result - "+result);
 		
 		for (UserDetails user: users){
 			System.out.println(user.getUserName());
