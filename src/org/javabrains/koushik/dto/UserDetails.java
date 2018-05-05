@@ -9,6 +9,7 @@ import java.util.Set;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
+import javax.persistence.Cacheable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -32,6 +33,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.CollectionId;
 import org.hibernate.annotations.CollectionOfElements;
 import org.hibernate.annotations.GenericGenerator;
@@ -39,6 +42,8 @@ import org.hibernate.annotations.Type;
 import org.hibernate.in.action.book.association.dto.Bid;
 
 @Entity 
+@Cacheable
+@Cache(usage=CacheConcurrencyStrategy.READ_ONLY)
 @NamedQuery(name="UserDetails.byId", query="from UserDetails where userId = ?")
 
 @org.hibernate.annotations.Entity(selectBeforeUpdate=true) // Don't use it un-necessarily
