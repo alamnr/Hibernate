@@ -2,6 +2,7 @@ package org.javabrains.koushik.hibernate;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -42,14 +43,36 @@ public class HibernateTest {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 
-		//Query query = session.createQuery("from UserDetails");
-			Query query = session.createQuery("from UserDetails where userId>5");
-		List<UserDetails> users = query.list();
+		
+		//Query query = session.createQuery("from UserDetails ");
+		
+		//Query query = session.createQuery("select userName from UserDetails ");
+		
+		Query query = session.createQuery("select new map(userId,userName) from UserDetails ");
+		
+		Query query2 = session.createQuery("select max(userId) from UserDetails ");
+		
+		query.setFirstResult(5); // select from row number -5
+		query.setMaxResults(2);
+		
+		//List<UserDetails> users = (List<UserDetails>)query.list();
+		
+		//List<String> userNames = (List<String>)query.list();
+		
+		List<Map<String,String>> users = (List<Map<String,String>>)query.list();
+		
+		int result = (int) query2.uniqueResult();
 		
 		session.getTransaction().commit();
 		session.close();
 
-		System.out.println("Size of list - "+ users.size());
+//		System.out.println("Size of list - "+ users.size());
+		
+		System.out.println("Size of list - "+ result);
+		
+		for (Map<String,String> map: users){
+			System.out.println(map);
+		}
 
 		HibernateUtil.shutDown();
 
