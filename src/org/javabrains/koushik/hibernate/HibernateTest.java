@@ -43,7 +43,7 @@ public class HibernateTest {
 		session.beginTransaction();
 
 		//Query query = session.createQuery("from UserDetails");
-		Query query = session.createQuery("from UserDetails where userId>5");
+			Query query = session.createQuery("from UserDetails where userId>5");
 		List<UserDetails> users = query.list();
 		
 		session.getTransaction().commit();
