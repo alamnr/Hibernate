@@ -55,11 +55,13 @@ public class HibernateTest {
         
 		UserDetails exampleUser = new UserDetails();
 		//exampleUser.setUserId(2);
-		exampleUser.setUserName("User- 2");
+		exampleUser.setUserName("User- 1%");
 		
 		//Example example = Example.create(exampleUser);
 		
-		Example example = Example.create(exampleUser).excludeProperty("userName");
+		//Example example = Example.create(exampleUser).excludeProperty("userName");
+		
+		Example example = Example.create(exampleUser).enableLike();
 		
 		Criteria criteria = session.createCriteria(UserDetails.class)
 				.add(example);
