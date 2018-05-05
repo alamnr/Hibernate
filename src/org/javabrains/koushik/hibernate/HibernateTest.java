@@ -48,8 +48,17 @@ public class HibernateTest {
 		session.beginTransaction();
         
 		Criteria criteria = session.createCriteria(UserDetails.class);
-		criteria.add(Restrictions.eq("userName", "User- 2"));
+		/*criteria.add(Restrictions.eq("userName", "User- 10"))
+				.add(Restrictions.gt("userId", 5));*/
 		
+		//criteria.add(Restrictions.gt("userId", 5));
+		
+		/*criteria.add(Restrictions.like("userName", "User- %"))
+		.add(Restrictions.gt("userId", 5));*/
+		
+		//criteria.add(Restrictions.between("userId", 5, 8));
+		
+		criteria.add(Restrictions.or(Restrictions.between("userId", 0, 2),Restrictions.between("userId", 5, 8)));
 		
 		List<UserDetails> users = (List<UserDetails>)criteria.list();
 		
