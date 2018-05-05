@@ -53,44 +53,23 @@ public class HibernateTest {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
         
-		UserDetails exampleUser = new UserDetails();
-		//exampleUser.setUserId(2);
-		exampleUser.setUserName("User- 1%");
+		// Hibernate provide default first level cache and with in same session for the same object it picks data from cache while calling session.get second time
 		
-		//Example example = Example.create(exampleUser);
+		UserDetails user = (UserDetails) session.get(UserDetails.class, 1);
+		user.setUserName("Updated User");
 		
-		//Example example = Example.create(exampleUser).excludeProperty("userName");
-		
-		Example example = Example.create(exampleUser).enableLike();
-		
-		Criteria criteria = session.createCriteria(UserDetails.class)
-				.add(example);
-		
-		/*Criteria criteria = session.createCriteria(UserDetails.class)
-				.setProjection(Projections.max("userId"));*/
-		
-		/*Criteria criteria = session.createCriteria(UserDetails.class)
-				.setProjection(Projections.count("userId"));
-		*/
-		
-		/*Criteria criteria = session.createCriteria(UserDetails.class)
-									.addOrder(Order.desc("userId"));*/
-		
-		
-		List<UserDetails> users = (List<UserDetails>)criteria.list();
-		
-		//int result = (int) criteria.uniqueResult();
+		UserDetails user2 = (UserDetails) session.get(UserDetails.class, 1);
 		
 		session.getTransaction().commit();
 		session.close();
 
-//		System.out.println("Size of list - "+ users.size());
+
+		session = sessionFactory.openSession();
+		session.beginTransaction();
 		
-		//System.out.println("result - "+result);
-		
-		for (UserDetails user: users){
-			System.out.println(user.getUserName());
-		}
+		UserDetails user3 = (UserDetails) session.get(UserDetails.class, 1);
+		session.getTransaction().commit();
+		session.close();
 
 		HibernateUtil.shutDown();
 
